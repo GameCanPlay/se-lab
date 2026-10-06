@@ -14,6 +14,7 @@ public class TorpedoStore {
 
   private int torpedoCount = 0;
 
+  // save the random Class into a field for reusability
   private Random generator = new Random();
 
   public TorpedoStore(int numberOfTorpedos){
@@ -32,6 +33,7 @@ public class TorpedoStore {
 
   public boolean fire(int numberOfTorpedos){
     if(numberOfTorpedos < 1 || numberOfTorpedos > this.torpedoCount){
+      // exception is now thrown properly
       throw new IllegalArgumentException("numberOfTorpedos");
     }
 
@@ -41,6 +43,7 @@ public class TorpedoStore {
 
     if (r >= FAILURE_RATE) {
       // successful firing
+      // we use -= for decrementing now, instead of the previously incorrect =-
       this.torpedoCount -= numberOfTorpedos;
       success = true;
     } else {
